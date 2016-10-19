@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/loaders.css"/>
+	<style type="text/css">
+	body{
+		background: pink
+	}
+	</style>
+</head>
+<body>
+<div id="loading">
+	
+</div>	
+</body>
+<script type="text/javascript">
+	var aImg = ["1.png","2.png","3.png","4.png","5.png"]
+	var div = document.getElementById('loading');
+	loading(div,{
+		img:aImg,
+		background:"blue",
+		// type:'ball_grid_pulse'
+	},function () {
+		setTimeout(function () {
+			div.style.display = "none";
+		},3000)
+	})
+	function loading(obj,opstions,cb) {
+		var ops = {
+			img:[],
+			background:"pink",	
+			type:'ball_pulse'
+		}
+		for(var key in opstions){
+			ops[key] = opstions[key];
+		}
+		var loaders = {
+				ball_pulse:'<div class="loader"><div class="loader-inner ball-pulse"><div></div> <div></div><div></div></div></div>',
+				ball_grid_pulse:'<div class="loader"><div class="loader-inner ball-grid-pulse"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>',
+				ball_clip_rotate:'<div class="loader"><div class="loader-inner ball-clip-rotate"><div></div></div></div>',
+				ball_clip_rotate_pulse:'<div class="loader"><div class="loader-inner ball-clip-rotate-pulse"><div></div><div></div></div></div>',
+				square_spin:'<div class="loader"><div class="loader-inner square-spin"><div></div></div></div>',
+				ball_clip_rotate_multiple:'<div class="loader"><div class="loader-inner ball-clip-rotate-multiple"><div></div><div></div></div></div>',
+				ball_pulse_rise:'<div class="loader"><div class="loader-inner ball-pulse-rise"><div></div><div></div><div></div><div></div><div></div></div></div>',
+				ball_rotate:'<div class="loader"><div class="loader-inner ball-rotate"><div></div></div></div>',
+				cube_transition:'<div class="loader"><div class="loader-inner cube-transition"><div></div><div></div></div></div>',
+				ball_zig_zag:'<div class="loader"><div class="loader-inner ball-zig-zag"><div></div><div></div></div></div>',
+				ball_zig_zag_deflect:'<div class="loader"><div class="loader-inner ball-zig-zag-deflect"><div></div><div></div></div></div>',
+				ball_triangle_path:'<div class="loader"><div class="loader-inner ball-triangle-path"><div></div><div></div><div></div></div></div>',
+				ball_scale:'<div class="loader"><div class="loader-inner ball-scale"><div></div></div></div>',
+				line_scale:'<div class="loader"><div class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>',
+				line_scale_party:'<div class="loader"><div class="loader-inner line-scale-party"><div></div><div></div><div></div><div></div></div> </div>',
+				ball_scale_multiple:'<div class="loader"><div class="loader-inner ball-scale-multiple"><div></div><div></div><div></div></div></div>',
+				ball_pulse_sync:'<div class="loader"><div class="loader-inner ball-pulse-sync"><div></div><div></div><div></div></div></div>',
+				ball_beat:'<div class="loader"><div class="loader-inner ball-beat"><div></div><div></div><div></div></div></div>',
+				line_scale_pulse_out:'<div class="loader"><div class="loader-inner line-scale-pulse-out"><div></div><div></div><div></div><div></div><div></div></div></div>',
+				line_scale_pulse_out_rapid:'<div class="loader"><div class="loader-inner line-scale-pulse-out-rapid"><div></div><div></div><div></div><div></div><div></div></div></div>',
+				ball_scale_ripple:'<div class="loader"><div class="loader-inner ball-scale-ripple"><div></div></div></div>',
+				ball_scale_ripple_multiple:'<div class="loader"><div class="loader-inner ball-scale-ripple-multiple"><div></div><div></div><div></div></div></div>',
+				ball_spin_fade_loader:'<div class="loader"><div class="loader-inner ball-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>',
+				line_spin_fade_loader:'<div class="loader"><div class="loader-inner line-spin-fade-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>',
+				triangle_skew_spin:'<div class="loader"><div class="loader-inner triangle-skew-spin"><div></div></div></div>',
+				pacman:'<div class="loader"><div class="loader-inner pacman"> <div></div><div></div><div></div><div></div><div></div></div></div>',
+				ball_grid_beat:'<div class="loader"><div class="loader-inner ball-grid-beat"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>',
+				semi_circle_spin:'<div class="loader"><div class="loader-inner semi-circle-spin"><div></div></div></div>'
+			}
+		obj.innerHTML = loaders[ops.type];
+		var loader = obj.children[0];
+		loader.style.position = "absolute";
+		loader.style.left = "50%";
+		loader.style.top = "50%";
+		loader.style.marginTop = "-25px";
+		loader.style.marginLeft = "-25px";
+		obj.style.position = "absolute";
+		obj.style.left = 0;
+		obj.style.top = 0;
+		obj.style.width = '100%';
+		obj.style.height = '100%';
+		obj.style.backgroundColor = ops.background;
+		var aImg = ops.img;
+		if (aImg.length>0) {
+			var index = 0;
+			for (var i = 0; i < aImg.length; i++) {
+				var img = new Image();	
+				img.src = aImg[i];
+				img.onload = function () {
+					index++;
+					if (index==aImg.length) {
+						cb && cb();
+					}
+				}
+			}			
+		}else{
+			cb && cb();
+		}
+	}
+</script>
+</html>
+
+
+
+
